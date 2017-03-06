@@ -15,15 +15,15 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void switchToCatalogPage(WebDriver driver) {
+    public void switchToCatalogPage() {
         WebDriverWait wait = new WebDriverWait(driver, 200);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Catalog")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"menu-item-15\"]/a")));
         element.click();
     }
 
-    public void switchToFeaturesPage(WebDriver driver) {
+    public void switchToFeaturesPage() {
         WebDriverWait wait = new WebDriverWait(driver, 200);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Features")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"menu-item-14\"]/a")));
         element.click();
     }
 
@@ -35,7 +35,12 @@ public class HomePage {
 
     public void switchToSignInPage() {
         WebDriverWait wait = new WebDriverWait(driver, 200);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Sign In")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-menu\"]/ul[1]/li[4]/a")));
+        element.click();
+    }
+    public void showDropDownMenu() {
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-menu\"]/ul[1]/li[5]/a")));
         element.click();
     }
 
@@ -78,5 +83,15 @@ public class HomePage {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"menu-item-16\"]/a")));
         element.click();
         driver.findElement(By.xpath("//*[@id=\"menu-item-43078\"]/a")).click();
+    }
+    public void checkHomePageIsLoaded(){
+        WebDriverWait HomePage = new WebDriverWait(driver, 200);
+        HomePage.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"site-header\"]/div/h1/a")));
+    }
+
+    public void clickTextureLogo(){
+        WebDriverWait HomePage = new WebDriverWait(driver, 200);
+        WebElement element = HomePage.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"site-header\"]/div/h1/a")));
+        element.click();
     }
 }

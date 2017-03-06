@@ -2,8 +2,17 @@ package com.github.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AccountSummaryPage {
+    private final WebDriver driver;
+
+    public AccountSummaryPage(WebDriver driver) {
+
+        this.driver = driver;
+    }
 	public void signOut(WebDriver driver){
 		driver.findElement(By.id("nim_acctAcctSummarySignOutLink")).click();
 	}
@@ -18,5 +27,9 @@ public class AccountSummaryPage {
     }
     public void getStarted(WebDriver driver){
     	driver.findElement(By.linkText("Get started")).click();
+    }
+    public void clickTextureLogo(){
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"nim_layoutLogoImage\"]"))).click();
     }
 }
