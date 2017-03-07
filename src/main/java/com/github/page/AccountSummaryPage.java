@@ -1,5 +1,6 @@
 package com.github.page;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ public class AccountSummaryPage {
 
         this.driver = driver;
     }
-	public void signOut(WebDriver driver){
+	public void signOut(){
 		driver.findElement(By.id("nim_acctAcctSummarySignOutLink")).click();
 	}
     public void switchToReferLink(WebDriver driver){
@@ -25,11 +26,21 @@ public class AccountSummaryPage {
     public void updateBillingInfo(WebDriver driver){
     	driver.findElement(By.id("nim_acctUpdateBillingInfoBtn")).click();	
     }
-    public void getStarted(WebDriver driver){
+    public void getStarted(){
     	driver.findElement(By.linkText("Get started")).click();
     }
     public void clickTextureLogo(){
         WebDriverWait wait = new WebDriverWait(driver, 200);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"nim_layoutLogoImage\"]"))).click();
+    }
+    public void checkAccountSummaryPageIsLoaded(){
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("nim_acctSummaryDoneButton")));
+        Assert.assertTrue(driver.getPageSource().contains("Account Summary"));
+    }
+    public void changeEmailAddress(){
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("nim_acctUpdateEmail")));
+        element.click();
     }
 }

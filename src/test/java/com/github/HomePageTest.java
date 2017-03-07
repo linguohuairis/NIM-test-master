@@ -1,9 +1,6 @@
 package com.github;
 
-import com.github.page.AccountSummaryPage;
-import com.github.page.HomePage;
-import com.github.page.SignInPage;
-import com.github.page.StartMemberShipSplashPage;
+import com.github.page.*;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -104,13 +101,43 @@ public class HomePageTest {
         Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"account-menu\"]/li[1]/a")).getText().contains("Account Summary"));
         Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"account-menu\"]/li[2]/a")).getText().contains("Sign Out"));
     }
+    @Test
     public void SNF11(){
         HomePage homePage = new HomePage(driver);
         homePage.switchToSignInPage();
         SignInPage signInPage = new SignInPage(driver);
-        signInPage.LoginValidUser("jk5@163.com","123456");
+        signInPage.LoginValidUser("jk6@163.com","123456");
         AccountSummaryPage accountSummaryPage = new AccountSummaryPage(driver);
-        accountSummaryPage.clickTextureLogo();
+        accountSummaryPage.checkAccountSummaryPageIsLoaded();
+//        Assert.assertTrue(driver.getPageSource().contains("Billing Info"));
+//        Assert.assertTrue(driver.getPageSource().contains("Credit Card Details"));
+//        Assert.assertTrue(driver.getPageSource().contains("MasterCard ending in 0004"));
+//        Assert.assertTrue(driver.getPageSource().contains("Expiration date: 10/18"));
+//        Assert.assertTrue(driver.getPageSource().contains("master"));
+//        Assert.assertTrue(driver.getPageSource().contains("ZIP code: 01001"));
+//        Assert.assertTrue(driver.findElement(By.id("nim_acctSummaryDoneButton")).getText().contains("Done"));
+//        Assert.assertTrue(driver.getPageSource().contains("Order History"));
+        accountSummaryPage.signOut();
+        homePage.switchToSignInPage();
+        signInPage.LoginValidUser("jk8@163.com","123456");
+        StartMemberShipSplashPage startMemberShipSplashPage = new StartMemberShipSplashPage(driver);
+        startMemberShipSplashPage.clickNoThanksButton();
+        accountSummaryPage.checkAccountSummaryPageIsLoaded();
+        Assert.assertTrue(driver.getPageSource().contains("Get started"));
+        accountSummaryPage.getStarted();
+        PricingPage pricingPage = new PricingPage(driver);
+        pricingPage.checkPricingPageIsLoaded();
+        pricingPage.clickTextureLogo();
+        homePage.checkHomePageIsLoaded();
+    }
+    public void SNF12(){
+        HomePage homePage = new HomePage(driver);
+        homePage.switchToSignInPage();
+        SignInPage signInPage = new SignInPage(driver);
+        signInPage.LoginValidUser("jk9@163.com","123456");
+        AccountSummaryPage accountSummaryPage = new AccountSummaryPage(driver);
+        accountSummaryPage.checkAccountSummaryPageIsLoaded();
+
 
     }
 //    @After

@@ -1,5 +1,6 @@
 package com.github.page;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +43,9 @@ public class HomePage {
         WebDriverWait wait = new WebDriverWait(driver, 200);
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-menu\"]/ul[1]/li[5]/a")));
         element.click();
+    }
+    public void selectAccountSummay(){
+        driver.findElement(By.xpath("//*[@id=\"account-menu\"]/li[1]/a")).click();
     }
 
     public void switchToAccountSummaryPage(WebDriver driver) {
@@ -87,6 +91,7 @@ public class HomePage {
     public void checkHomePageIsLoaded(){
         WebDriverWait HomePage = new WebDriverWait(driver, 200);
         HomePage.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"site-header\"]/div/h1/a")));
+        Assert.assertTrue(driver.getPageSource().contains("All the best magazines."));
     }
 
     public void clickTextureLogo(){
