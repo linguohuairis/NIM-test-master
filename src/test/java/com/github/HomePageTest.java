@@ -2,6 +2,8 @@ package com.github;
 
 import com.github.page.*;
 import org.junit.*;
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -87,7 +89,7 @@ public class HomePageTest {
         homePage.checkHomePageIsLoaded();
         Assert.assertTrue(driver.findElement(By.xpath("//*[@id=\"main-menu\"]/ul[1]/li[4]/a")).getText().contains("Sign In"));
     }
-    @Test
+
     public void SNF10(){
         HomePage homePage = new HomePage(driver);
         homePage.switchToSignInPage();
@@ -130,6 +132,8 @@ public class HomePageTest {
         pricingPage.clickTextureLogo();
         homePage.checkHomePageIsLoaded();
     }
+
+
     public void SNF12(){
         HomePage homePage = new HomePage(driver);
         homePage.switchToSignInPage();

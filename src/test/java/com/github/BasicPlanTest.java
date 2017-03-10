@@ -1,21 +1,29 @@
 package com.github;
 
+import com.github.common.Config;
+import com.github.common.DBConnection;
 import com.github.page.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+//import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.testng.*;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+
 public class BasicPlanTest {
     public WebDriver driver;
 
-    @Before
+    @BeforeTest
     public void setUp() throws Exception {
         System.out.print("1111111111111");
         System.setProperty("webdriver.gecko.driver", "drivers/geckodriverwindows.exe");
@@ -25,7 +33,7 @@ public class BasicPlanTest {
         System.out.print("2222222222");
     }
 
-    @Test
+  @Test
     public void shouldRegisterAnAccountAndBuyABasicPlanSuccessfully() throws Exception {
         HomePage homePage = new HomePage(driver);
         homePage.switchToSignInPage();
@@ -45,6 +53,9 @@ public class BasicPlanTest {
         billingInfoPage.enterValidCreditCard("5500000000000004");
         PlanReceiptPage planReceiptPage = new PlanReceiptPage(driver);
         String unlimitedReceiptHeader = planReceiptPage.getUnlimitedReceiptHeader();
+        Config config = new Config();
+        DBConnection db = new DBConnection();
+        db.insert(email,"123456",config.getDate(),"Basic_free");
         assertThat(unlimitedReceiptHeader, is("Your membership's started."));
         assertThat(planReceiptPage.getUnlimitedSubReceiptHeader(),
                 is("Ready to read? Just download the app and sign in with your Texture account: " + email));
