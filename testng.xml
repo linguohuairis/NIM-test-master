@@ -3,6 +3,7 @@
   <test name="Regression1">
     <classes>
       <class name="com.github.BasicPlanTest"/>
+      <class name="com.github.HomePageTest"/>
     </classes>
   </test>
 </suite>

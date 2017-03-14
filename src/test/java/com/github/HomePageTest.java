@@ -1,15 +1,15 @@
 package com.github;
 
 import com.github.page.*;
-import org.junit.*;
-
+import org.junit.Assert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -20,7 +20,7 @@ import static org.hamcrest.core.Is.is;
 public class HomePageTest {
     public WebDriver driver;
 
-    @Before
+    @BeforeTest
     public void setUp() throws Exception {
         System.setProperty("webdriver.gecko.driver", "drivers/geckodriverwindows.exe");
         // System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
@@ -133,7 +133,7 @@ public class HomePageTest {
         homePage.checkHomePageIsLoaded();
     }
 
-
+@Test
     public void SNF12(){
         HomePage homePage = new HomePage(driver);
         homePage.switchToSignInPage();
@@ -141,6 +141,17 @@ public class HomePageTest {
         signInPage.LoginValidUser("jk9@163.com","123456");
         AccountSummaryPage accountSummaryPage = new AccountSummaryPage(driver);
         accountSummaryPage.checkAccountSummaryPageIsLoaded();
+        assertThat(driver.findElement(By.id("nim_acctUpdateEmail")).getText(),is("Change"));
+        assertThat(driver.findElement(By.id("nim_acctUpdatePassword")).getText(),is("Change"));
+        assertThat(driver.findElement(By.xpath("//*[@id=\"nim_acctSummaryContent\"]/div[5]/div[1]/div/div[4]/div/p")).getText(),is("Email Notifications\n"+"Go to email Preference Center"));
+        accountSummaryPage.changeEmailAddress();
+        UpdateEmailAddressPage updateEmailAddressPage = new UpdateEmailAddressPage(driver);
+        updateEmailAddressPage.checkUpdateEmailAddressPage();
+        updateEmailAddressPage.clickCancel();
+        accountSummaryPage.changePassword();
+        UpdatePasswordPage updatePasswordPage = new UpdatePasswordPage(driver);
+        updatePasswordPage.checkUpdatePasswordPage();
+        updatePasswordPage.clickCancel();
 
 
     }

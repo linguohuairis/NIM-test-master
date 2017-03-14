@@ -44,4 +44,15 @@ public class AccountSummaryPage {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("nim_acctUpdateEmail")));
         element.click();
     }
+    public void changePassword(){
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("nim_acctUpdatePassword")));
+        element.click();
+    }
+    public void GoToEmailPreferenceCenter(){
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("nim_acctPasswordText")));
+        element.click();
+    }
+
 }
